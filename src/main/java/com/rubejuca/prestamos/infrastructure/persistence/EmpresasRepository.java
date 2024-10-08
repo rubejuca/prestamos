@@ -1,6 +1,9 @@
 package com.rubejuca.prestamos.infrastructure.persistence;
 
-public class EmpresasRepository {
+import com.rubejuca.prestamos.empresas.Empresa;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmpresasRepository extends JpaRepository<Empresa, String> {
 
 
 }

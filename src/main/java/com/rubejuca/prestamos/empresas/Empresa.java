@@ -1,5 +1,8 @@
 package com.rubejuca.prestamos.empresas;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,8 +12,11 @@ import java.util.UUID;
 
 @Builder
 @Getter
+@Entity
+@Table(name = "empresa")
 public class Empresa {
 
+    @Id
     private String id;
     private String nit;
     private String nombre;
