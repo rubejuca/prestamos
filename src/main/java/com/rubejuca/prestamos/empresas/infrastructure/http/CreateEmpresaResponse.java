@@ -1,4 +1,4 @@
-package com.rubejuca.prestamos.infrastructure.api;
+package com.rubejuca.prestamos.empresas.infrastructure.http;
 
 public record CreateEmpresaResponse(String id, String nit, String nombre) {
 }

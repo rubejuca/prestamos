@@ -1,6 +1,6 @@
-package com.rubejuca.prestamos.empresas;
+package com.rubejuca.prestamos.empresas.domain;
 
-import com.rubejuca.prestamos.infrastructure.persistence.EmpresasRepository;
+import com.rubejuca.prestamos.empresas.infrastructure.EmpresasRepository;
 import org.springframework.stereotype.Service;
 
 @Service

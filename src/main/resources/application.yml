@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: Prestamos e Inversiones
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=prestamos
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    locations: classpath:db/migrations
+    user: postgres
+    password: password
+    schemas: prestamos
+    url: jdbc:postgresql://localhost:5432/postgres

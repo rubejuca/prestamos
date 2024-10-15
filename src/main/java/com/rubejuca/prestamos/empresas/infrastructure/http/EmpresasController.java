@@ -1,7 +1,7 @@
-package com.rubejuca.prestamos.infrastructure.api;
+package com.rubejuca.prestamos.empresas.infrastructure.http;
 
-import com.rubejuca.prestamos.empresas.Empresa;
-import com.rubejuca.prestamos.empresas.EmpresaService;
+import com.rubejuca.prestamos.empresas.domain.Empresa;
+import com.rubejuca.prestamos.empresas.domain.EmpresaService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,4 +20,5 @@ public class EmpresasController {
         Empresa empresa = empresaService.create(request.nit(), request.nombre());
         return new CreateEmpresaResponse(empresa.getId(), empresa.getNit(), empresa.getNombre());
     }
+
 }
