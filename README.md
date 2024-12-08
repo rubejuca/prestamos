@@ -1,120 +1,144 @@
-# PRESTAMOS
-Prestamos e inversiones
+# Prestamos e Inversiones
+Sistema para la gestión de Préstamos por Libranzas e Inversiones de capital
 
-## 1. ACTORES
+## 1. Actores del sistema
 
-### Inversionista
-Quienes invierten dinero para prestar
-### Cliente
-A quien le hacen el préstamo
+### Prestamista 
+Persona que tramita el préstamo y gestiona la libranza y cobros.
+Es a quien los inversionistas le encargan el dinero para trabajarlo y responden por los pagos.
+### Prestatario
+Persona asociada a una Empresa, quien se endeuda en el préstamo.
 ### Empresa
-Donde trabaja el cliente y donde descuentan las cuotas
+Entidad donde trabaja el cliente, las Empresas hacen el descuento de las cuotas del salario de sus empleados y los consiga.
+### Inversionista
+Personas que invierten dinero en el negocio y ganan una rentabilidad periódica.
 
 ## 2. CASOS DE USO
 
-### Crear Empresas
-Datos de las empresas: NIT, Nombre, Dirección, Contacto, Telefono
-### Actualizar Empresas
-Datos de las empresas: NIT, Nombre, Dirección, Contacto, Telefono
-### Listar Empresas
-Listar las empresas 
-### Buscar Empresas
-Buscar empresas por nombre y/o Nit
-
-### Crear Persona
-Datos: Cédula, Nombre, Dirección, telefonos, email, cuenta bancaria
-### Actualizar Persona
-Datos: Cédula, Nombre, Dirección, telefonos
-### Listar Persona
-Listar inversionistas
-### Buscar Persona
-
-### Crear Inversión
-Datos: Fecha, Inversionista, Capital, Interés, Plazo
-### Actualizar Inversión
-Datos: Fecha, Inversionista, Capital, Interés, Plazo
-### Listar Inversión
-### Buscar Inversión
-
-### Crear Préstamo
-Datos: Libranza #, Fecha, Cliente, Empresa, Capital, Interes, Cuota, Cuotas
-### Recalculo por pago total anticipado
-### Recalculo por cambio en las condiciones
-Por cambios en: Capital, Interes, Cuotas
-### Pagos del Préstamos
-Datos: Prestamo, Valor, Fecha, Saldo, #Cuota
-### Buscar Préstamos
-
-### Listado para cobros
-### Resumen de utilidades
-### Liquidación de inversiones
+### Prestamistas
+- Crear: ``POST /api/prestamistas``
+- Actualizar: ``PUT /api/prestamistas``
+- Listar: ``GET /api/prestamistas``
+### Empresas
+- Crear: ``POST /api/empresas``
+- Actualizar: ``PUT /api/empresas``
+- Listar: ``GET /api/empresas``
+- Buscar: ``GET /api/empresas?search=``
+### Personas
+- Crear: ``POST /api/personas``
+- Actualizar: ``PUT /api/personas``
+- Listar: ``GET /api/personas``
+- Buscar: ``GET /api/personas?search=``
+### Inversiones
+- Crear: ``POST /api/inversiones`` 
+- Actualizar: ``PUT /api/inversiones``
+- Listar: ``GET /api/inversiones``
+- Buscar: ``GET /api/inversiones?search=``
+- Registrar pagos: ``POST /api/inversiones/{inversionId}/pagos``
+- Listar pagos: ``GET /api/inversiones/{inversionId}/pagos``
+### Préstamos
+- Crear: ``POST /api/prestamos`` 
+- Listar: ``GET /api/prestamos`` 
+- Buscar: ``POST /api/prestamos?search=`` 
+- Ver recalculo por pago total anticipado: ``GET /api/prestamos/{prestamoId}?accion=PAGO_ANTICIPADO&fecha=`` 
+- Recalculo por pago total anticipado: ``POST /api/prestamos/{prestamoId}?accion=PAGO_ANTICIPADO&fecha=`` 
+- Ver Recalculo por cambio en las condiciones: ``GET /api/prestamos/{prestamoId}?accion=CAMBIO_CONDICIONES`` 
+- Recalculo por cambio en las condiciones: ``POST /api/prestamos/{prestamoId}?accion=CAMBIO_CONDICIONES`` 
+- Registrar pagos: ``POST /api/prestamos/{prestamoId}/pagos``
+- Ver pagos: ``GET /api/prestamos/{prestamoId}/pagos`` 
+- Generar Listado para cobros: ``GET /api/prestamos?empresa={empresaId}``
+- Resumen de utilidades por periodo: ``GET /api/report?desde=&hasta=`` 
 
 ## 3. Modelo de datos
-
-COMPANY
+PRESTAMISTA
 |field|type|attributes
 |---|---|---|
-|id|varchar(36)|PK|
-|nit|varchar(15)|NN|
-|name|varchar(100)|NN|
-|address|varchar(100)||
-|contact|varchar(100)||
-|phone|varchar(100)||
+|id|varchar(10)|PK|
+|nit|varchar(15)|Not null|
+|nombre|varchar(15)|Not null|
+|email|varchar(100)|Not null|
+|direccion|varchar(100)|Not null|
+
+EMPRESA
+|field|type|attributes
+|---|---|---|
+|id|varchar(36)|PK, UUID auto|
+|nit|varchar(15)|Not null|
+|nombre|varchar(100)|Not null|
+|direccion|varchar(100)||
+|contacto|varchar(100)||
+|telefono|varchar(100)||
 |email|varchar(100)||
 
-PERSON
+PERSONA
 |field|type|attributes
 |---|---|---|
-|id|varchar(36)|PK|
-|identification|varchar(15)|NN|
-|full_name|varchar(100)|NN|
-|address|varchar(100)||
-|phone|varchar(100)||
+|id|varchar(36)|PK, UUID auto|
+|identificacion|varchar(15)|Not null|
+|nombre|varchar(100)|Not null|
+|direccion|varchar(100)||
+|telefono|varchar(100)||
 |email|varchar(100)||
-|bank|varchar(100)||
-|bank_account|varchar(100)||
+|banco|varchar(50)||
+|banco_cuenta|varchar(30)||
 
-INVESTMENT
+INVERSION
+|field|type|attributes
+|---|---|---|
+|id|varchar(36)|PK, UUID auto|
+|fecha|timestamp|Not null|
+|persona_id|varchar(36)|FK|
+|prestamista_id|varchar(36)|FK|
+|capital|numeric(12,2)|Not null|
+|interes|numeric(12,2)|Not null|
+|intereses|numeric(12,2)|Not null|
+|periodos|numeric(3)|Not null|
+|observaciones|text||
+|capital_pagado|numeric(12,2)|Not null|
+|intereses_pagado|numeric(12,2)|Not null|
+|estado|varchar(10)|Not null (Activo, Terminado, Anulado)|
+|foto_url|varchar(1000)|URL de la Letra de Cambio|
+|ultimo_pago|timestamp||
+
+INVERSION_PAGOS
+|field|type|attributes
+|---|---|---|
+|id|varchar(36)|PK, UUID auto|
+|inversion_id|varchar(36)|FK Not null|
+|fecha|timestamp|Not null|
+|capital|numeric(12,2)|Not null|
+|interes|numeric(12,2)|Not null|
+|dias_liquidados|numeric(12,2)|Not null|
+|capital_pagado|numeric(12,2)|Not null|
+|intereses_pagado|numeric(12,2)|Not null|
+|total_pagado|numeric(12,2)|Not null|
+
+PRESTAMO
+|field|type|attributes
+|---|---|---|
+|id|varchar(36)|PK, UUID auto|
+|prestamista_id|varchar(36)|FK|
+|libranza|varchar(36)|PK|
+|fecha|timestamp|Not null|
+|persona_id|varchar(36)|FK|
+|capital|numeric(12,2)|Not null|
+|interes|numeric(12,2)|Not null|
+|intereses|numeric(12,2)|Not null|
+|cuotas|numeric(3)|Not null|
+|cuota|numeric(12,2)|Not null|
+|estado|varchar(10)|Not null (Activo, Pagado, Anulado)|
+|ultimo_pago|timestamp||
+|foto_url|varchar(1000)|URL de la libranza|
+|observaciones|text||
+
+PRESTAMO_PAGO
 |field|type|attributes
 |---|---|---|
 |id|varchar(36)|PK|
-|created_at|timestamp|NN|
-|updated_at|timestamp|NN|
-|person_id|varchar(36)|FK|
-|capital|numeric(12)|FK|
-|interest_rate|numeric(10,2)|NN|
-|periods|integer|NN|
-
-PAYMENT_INVESTMENT
-|field|type|attributes
-|---|---|---|
-|id|varchar(36)|PK|
-|created_at|timestamp|NN|
-|updated_at|timestamp|NN|
-|investment_id|varchar(36)|FK|
-|amount|numeric(12)|FK|
-|capital_balance|numeric(12)||
-|period|integer||
-
-LOAN
-|field|type|attributes
-|---|---|---|
-|id|varchar(36)|PK|
-|created_at|timestamp|NN|
-|updated_at|timestamp|NN|
-|person_id|varchar(36)|FK|
-|capital|numeric(12)|NN|
-|interest_rate|numeric(10,2)|NN|
-|installments|numeric(10)|NN|
-|installment_value|numeric(10)|NN|
-
-LOAN_PAYMENT
-|field|type|attributes
-|---|---|---|
-|id|varchar(36)|PK|
-|created_at|timestamp|NN|
-|updated_at|timestamp|NN|
-|loan_id|varchar(36)|FK|
-|amount|numeric(12)|FK|
-|balance|numeric(12)||
-|installment_number|integer||
+|fecha|timestamp|Not null|
+|prestamo_id|varchar(36)|FK|
+|total|numeric(12,2)|Not null|
+|capital|numeric(12,2)|Not null|
+|intereses|numeric(12,2)|Not null|
+|cuota|integer|Not null|
+|tipo_pago|varchar(20)|Descuento, Personal|
