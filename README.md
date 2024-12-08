@@ -36,6 +36,8 @@ Personas que invierten dinero en el negocio y ganan una rentabilidad periódica.
 - Buscar: ``GET /api/inversiones?search=``
 - Registrar pagos: ``POST /api/inversiones/{inversionId}/pagos``
 - Listar pagos: ``GET /api/inversiones/{inversionId}/pagos``
+- Resumen de inversiones por periodo: ``GET /api/reportes/inversiones?desde=&hasta=`` 
+
 ### Préstamos
 - Crear: ``POST /api/prestamos`` 
 - Listar: ``GET /api/prestamos`` 
@@ -47,7 +49,7 @@ Personas que invierten dinero en el negocio y ganan una rentabilidad periódica.
 - Registrar pagos: ``POST /api/prestamos/{prestamoId}/pagos``
 - Ver pagos: ``GET /api/prestamos/{prestamoId}/pagos`` 
 - Generar Listado para cobros: ``GET /api/prestamos?empresa={empresaId}``
-- Resumen de utilidades por periodo: ``GET /api/report?desde=&hasta=`` 
+- Resumen de utilidades por periodo: ``GET /api/reportes/utilidades?desde=&hasta=`` 
 
 ## 3. Modelo de datos
 PRESTAMISTA
