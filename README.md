@@ -16,19 +16,41 @@ Personas que invierten dinero en el negocio y ganan una rentabilidad periódica.
 ## 2. CASOS DE USO
 
 ### Prestamistas
-- Crear: ``POST /api/prestamistas``
-- Actualizar: ``PUT /api/prestamistas``
-- Listar: ``GET /api/prestamistas``
+- Listar: 
+  - API: ``GET /api/prestamistas``
+  - UI: Listado 
+- Crear: 
+  - API: ``POST /api/prestamistas``
+  - UI: Formulario 
+- Actualizar: 
+  - API: ``PUT /api/prestamistas``
+  - UI: Formulario 
 ### Empresas
-- Crear: ``POST /api/empresas``
-- Actualizar: ``PUT /api/empresas``
-- Listar: ``GET /api/empresas``
-- Buscar: ``GET /api/empresas?search=``
+- Listar: 
+  - API: ``GET /api/empresas``
+  - UI: Listado 
+- Crear: 
+  - API: ``POST /api/empresas``
+  - UI: Formulario
+- Actualizar: 
+  - API: ``PUT /api/empresas``
+  - UI: Formulario
+- Buscar: 
+  - API: ``GET /api/empresas?search=``
+  - UI: Caja de texto para buscar en el listado
 ### Personas
-- Crear: ``POST /api/personas``
-- Actualizar: ``PUT /api/personas``
-- Listar: ``GET /api/personas``
-- Buscar: ``GET /api/personas?search=``
+- Crear: 
+  - API: ``POST /api/personas``
+  - UI: Formulario  
+- Actualizar: 
+  - API: ``PUT /api/personas``
+  - UI: Formulario  
+- Listar: 
+  - API: ``GET /api/personas``
+  - UI: Listado
+- Buscar: 
+  - API: ``GET /api/personas?search=``
+  - UI: Caja de texto para buscar en el listado
 ### Inversiones
 - Crear: ``POST /api/inversiones`` 
 - Actualizar: ``PUT /api/inversiones``
