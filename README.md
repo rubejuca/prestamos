@@ -166,3 +166,10 @@ PRESTAMO_PAGO
 |intereses|numeric(12,2)|Not null|
 |cuota|integer|Not null|
 |tipo_pago|varchar(20)|Descuento, Personal|
+
+
+## 4. UI/UX
+
+Esta es la estructura básica de la UI
+
+![alt text](wireframes/basic-ui-elements.png)
