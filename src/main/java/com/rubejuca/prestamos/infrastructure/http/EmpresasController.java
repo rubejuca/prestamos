@@ -1,7 +1,7 @@
-package com.rubejuca.prestamos.empresas.infrastructure.http;
+package com.rubejuca.prestamos.infrastructure.http;
 
-import com.rubejuca.prestamos.empresas.domain.Empresa;
-import com.rubejuca.prestamos.empresas.domain.EmpresaService;
+import com.rubejuca.prestamos.domain.empresa.model.Empresa;
+import com.rubejuca.prestamos.domain.empresa.EmpresaService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +14,9 @@ public class EmpresasController {
     public EmpresasController(EmpresaService empresaService) {
         this.empresaService = empresaService;
     }
+
+    public record CreateEmpresaRequest(String nit, String nombre) { }
+    public record CreateEmpresaResponse(String id, String nit, String nombre) { }
 
     @PostMapping("/api/empresas")
     public CreateEmpresaResponse create(@RequestBody CreateEmpresaRequest request) {
