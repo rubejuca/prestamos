@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @SuperBuilder(toBuilder = true)
 @Entity
-@Table(name = "inversionista")
+@Table(name = "empresa")
 public class Empresa extends BaseEntity {
 
     @Id

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class CreateEmpresaService {
+public class CreateEmpresaUseCase {
 
   private final EmpresaService empresaService;
 
-  public CreateEmpresaService(EmpresaService empresaService) {
+  public CreateEmpresaUseCase(EmpresaService empresaService) {
     this.empresaService = empresaService;
   }
 
